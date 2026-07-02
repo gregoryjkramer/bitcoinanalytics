@@ -1,0 +1,2 @@
+observation_utc,source_system,node_sync_percent,is_node_synced,mempool_fee_sat_vb,lightning_channels_health,status_text,created_by
+2026-07-02T19:45:00Z,manual_discord_status,100,true,42,healthy,"Bitcoin node is 100% synced; mempool pressure at 42 sat/vB; Lightning channels healthy",gregoryjkramer
