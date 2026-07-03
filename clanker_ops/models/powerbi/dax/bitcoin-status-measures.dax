@@ -1,0 +1,39 @@
+Latest Observation UTC =
+MAX ( fact_bitcoin_node_status[observation_utc] )
+
+Latest Node Sync % =
+VAR LatestObservationUtc = [Latest Observation UTC]
+RETURN
+    CALCULATE (
+        MAX ( fact_bitcoin_node_status[node_sync_percent] ),
+        fact_bitcoin_node_status[observation_utc] = LatestObservationUtc
+    )
+
+Latest Mempool Fee sat/vB =
+VAR LatestObservationUtc = [Latest Observation UTC]
+RETURN
+    CALCULATE (
+        MAX ( fact_bitcoin_node_status[mempool_fee_sat_vb] ),
+        fact_bitcoin_node_status[observation_utc] = LatestObservationUtc
+    )
+
+Node Synced Flag =
+VAR LatestObservationUtc = [Latest Observation UTC]
+RETURN
+    CALCULATE (
+        SELECTEDVALUE ( fact_bitcoin_node_status[is_node_synced] ),
+        fact_bitcoin_node_status[observation_utc] = LatestObservationUtc
+    )
+
+Lightning Healthy Flag =
+VAR LatestObservationUtc = [Latest Observation UTC]
+VAR LatestLightningHealth =
+    CALCULATE (
+        SELECTEDVALUE ( fact_bitcoin_node_status[lightning_channels_health] ),
+        fact_bitcoin_node_status[observation_utc] = LatestObservationUtc
+    )
+RETURN
+    LatestLightningHealth = "healthy"
+
+Observation Count =
+COUNTROWS ( fact_bitcoin_node_status )
